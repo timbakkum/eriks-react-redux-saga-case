@@ -1,3 +1,7 @@
 export default {
-  content: {}
+  products: {
+    test: {
+      test: 'test'
+    }
+  }
 };

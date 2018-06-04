@@ -1,8 +1,11 @@
 import { combineReducers } from 'redux';
-import contentReducer from './contentReducer';
+import { routerReducer } from 'react-router-redux';
+
+import productsReducer from './productsReducer';
 
 const rootReducer = combineReducers({
-  content: contentReducer
+  products: productsReducer,
+  router: routerReducer
 });
 
 export default rootReducer;
