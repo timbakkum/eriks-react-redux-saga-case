@@ -5,22 +5,7 @@ import PropTypes from 'prop-types';
 import { fetchProductsRequest } from './../../actions/productActions';
 import styled from 'styled-components';
 
-const ProductGrid = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-
-  @media screen and (min-width: 460px) {
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-
-  @supports (display: grid) {
-  }
-`;
-
-const ProductGridItem = styled.div`
+const Card = styled.div`
   flex: 0 0 100%;
   max-width: 100%;
   margin-bottom: 1.5rem;
@@ -29,23 +14,10 @@ const ProductGridItem = styled.div`
   align-items: center;
   justify-content: space-around;
   box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  background: white;
+  border: none;
   padding: 1rem;
-
-  @media screen and (min-width: 460px) {
-    flex: 0 0 40%;
-    max-width: 40%;
-  }
-
-  @media screen and (min-width: 768px) {
-    flex: 0 0 27%;
-    max-width: 27%;
-  }
-
-  @media screen and (min-width: 1200px) {
-    flex: 0 0 21%;
-    max-width: 21%;
-    justify-content: space-between;
-  }
 
   img {
     max-width: 100%;
@@ -59,9 +31,42 @@ const ProductGridItem = styled.div`
   }
 `;
 
+const ProductGrid = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  @media screen and (min-width: 460px) {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+
+  @media screen and (min-width: 1200px) {
+    justify-content: space-between;
+  }
+
+  ${Card} {
+    @media screen and (min-width: 460px) {
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
+
+    @media screen and (min-width: 768px) {
+      flex: 0 0 27%;
+      max-width: 27%;
+    }
+
+    @media screen and (min-width: 1200px) {
+      flex: 0 0 21%;
+      max-width: 21%;
+    }
+  }
+`;
+
 class ProductOverview extends Component {
   componentDidMount() {
-    if (this.props.products.length <= 0) {
+    if (this.props.products.length <= 9) {
       // fetch products if no cached products are present
       this.props.getProductsData();
     }
@@ -73,7 +78,7 @@ class ProductOverview extends Component {
         <h1>Product overview</h1>
         <ProductGrid>
           {this.props.products.map((product, i) => (
-            <ProductGridItem key={product.id}>
+            <Card key={product.id}>
               <img
                 src={`http://via.placeholder.com/200x200?text=Product+no.${
                   product.id
@@ -84,7 +89,7 @@ class ProductOverview extends Component {
               <Link to={`product/${product.id}`}>
                 Product #{product.id} details
               </Link>
-            </ProductGridItem>
+            </Card>
           ))}
         </ProductGrid>
       </div>
