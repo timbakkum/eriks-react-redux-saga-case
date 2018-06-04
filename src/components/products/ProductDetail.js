@@ -61,7 +61,7 @@ class ProductDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products
+    products: state.products.data
   };
 }
 

@@ -16,6 +16,7 @@ import Navigation from './components/navigation/Navigation';
 import registerServiceWorker from './registerServiceWorker';
 import { injectGlobal } from 'styled-components';
 import normalize from 'styled-normalize';
+import 'loaders.css/loaders.min.css';
 
 injectGlobal`
 ${normalize}
@@ -57,6 +58,18 @@ h4, h5, h6 {
   line-height: 1.5rem;
   margin-top: 1.5rem;
   margin-bottom: 0rem;
+}
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  margin: 0 auto;
+  display: table;
+}
+
+.square-spin>div {
+  border: none !important;
 }
 `;
 
