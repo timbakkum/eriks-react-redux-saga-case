@@ -14,7 +14,51 @@ import ProductDetail from './components/products/ProductDetail';
 import Navigation from './components/navigation/Navigation';
 
 import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import { injectGlobal } from 'styled-components';
+import normalize from 'styled-normalize';
+
+injectGlobal`
+${normalize}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}
+
+h1, h2, h3, h4, h5, h6, a {
+  font-weight: bold;
+  color: #1a5ca3;
+}
+
+h1 {
+  font-size: 4.25rem;
+  line-height: 4.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+h2 {
+  font-size: 2.625rem;
+  line-height: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: 1.625rem;
+  line-height: 3rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0rem;
+}
+
+h4, h5, h6 {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0rem;
+}
+`;
 
 const { store, persistor } = configureStore();
 const history = createHistory();
