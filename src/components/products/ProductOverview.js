@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchProductsRequest } from './../../actions/productActions';
@@ -17,7 +18,18 @@ class ProductOverview extends Component {
       <div>
         <h1>Product overview</h1>
         {this.props.products.map((product, i) => (
-          <h4 key={i}>{product.joke}</h4>
+          <div key={product.id}>
+            <img
+              src={`http://via.placeholder.com/200x200?text=Product+no.${
+                product.id
+              }`}
+              alt="placeholder"
+            />
+            <h4 key={i}>{product.joke}</h4>
+            <Link to={`product/${product.id}`}>
+              Product #{product.id} details
+            </Link>
+          </div>
         ))}
       </div>
     );
