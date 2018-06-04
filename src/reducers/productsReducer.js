@@ -6,6 +6,8 @@ export default function productsReducer(state = initialState.products, action) {
   switch (action.type) {
     case TYPES.FETCH_PRODUCTS_SUCCESS:
       return union([...state], action.data);
+    case TYPES.FETCH_PRODUCT_SUCCESS:
+      return union([...state], [action.data]);
     default:
       return state;
   }
