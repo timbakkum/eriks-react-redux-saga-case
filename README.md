@@ -1,5 +1,11 @@
 # Project README
 
+A lovely React Redux application created with Create React App.
+It displays a list of items fetched from a free Api. Upon clicked, the user is transitioned to a detail page with more information on the clicked item. The animation is created by mixing redux state with react motion and styled components.
+State is persisted using redux-persist.
+Routing state is stored in the redux store by using the ConnectedRouter from react-router-redux and by hooking it's routerMiddleware.
+Async calls are managed by redux saga's.
+
 ## To-do
 
 * convert product array to Object
