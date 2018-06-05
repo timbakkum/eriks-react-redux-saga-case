@@ -27,7 +27,11 @@ class ProductOverview extends Component {
     }
 
     const x = event.currentTarget.offsetLeft;
-    const y = event.currentTarget.offsetTop - window.scrollY;
+
+    // the 64 px is the height of the navigation bar
+    // this should be a variable/constant in an ideal world
+    // that gets used by both this function and the styled components
+    const y = event.currentTarget.offsetTop - window.scrollY - 64;
     const styles = { x, y };
 
     this.props.setDetailStartingStyles(styles);
@@ -37,7 +41,7 @@ class ProductOverview extends Component {
   render() {
     return (
       <div>
-        <h1>Product overview</h1>
+        <h1 style={{ textAlign: 'center' }}>Product overview</h1>
         {this.props.loading ? (
           <Loader type="square-spin" color="#1a5ca3" active />
         ) : (

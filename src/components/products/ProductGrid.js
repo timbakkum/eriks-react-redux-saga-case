@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Card from './../common/Card';
-import Button from './../common/Button';
 
 const ProductGridWrapper = styled.div`
   display: flex;
@@ -37,18 +36,19 @@ const ProductGridWrapper = styled.div`
   }
 `;
 
+const ProductCardImage = styled.img`
+  cursor: pointer;
+`;
+
 const renderProducts = (products, transitionToDetail) => {
   return products.map((product, i) => (
     <Card key={product.id}>
-      <img
+      <ProductCardImage
         src={`http://via.placeholder.com/200x200?text=Product+no.${product.id}`}
         alt="placeholder"
+        onClick={transitionToDetail.bind(null, product.id)}
       />
       <p key={i}>{product.joke}</p>
-
-      <Button onClick={transitionToDetail.bind(null, product.id)}>
-        Product #{product.id} details
-      </Button>
     </Card>
   ));
 };

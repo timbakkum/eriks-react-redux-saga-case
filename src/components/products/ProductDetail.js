@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
-    console.log(props);
+
     this.selectProduct = this.selectProduct.bind(this);
     this.renderProduct = this.renderProduct.bind(this);
   }

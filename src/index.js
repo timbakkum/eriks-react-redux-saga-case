@@ -25,6 +25,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   font-size: 1rem;
   line-height: 1.5rem;
+  padding-top: 64px;
 }
 
 h1, h2, h3, h4, h5, h6, a {

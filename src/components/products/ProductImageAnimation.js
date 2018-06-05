@@ -6,7 +6,7 @@ import { Motion, spring } from 'react-motion';
 const ProductImage = styled.img`
   left: ${props => props.x}px;
   top: ${props => props.y}px;
-  position: fixed;
+  position: absolute;
   z-index: 10;
 `;
 
@@ -14,7 +14,7 @@ class ProductImageAnimation extends React.Component {
   render() {
     const { x, y, image } = this.props;
     const endingX = 10;
-    const endingY = 50 + 64;
+    const endingY = 50;
 
     return (
       <Motion

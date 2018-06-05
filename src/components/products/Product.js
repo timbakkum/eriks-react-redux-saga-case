@@ -20,17 +20,31 @@ const ProductHeader = styled.header`
   position: relative;
   background: #1a5ca3;
   color: white;
-  height: 300px;
+
   width: 100%;
-  padding-left: 220px;
+  padding-left: 10px;
+  padding-top: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  animation: ${fadeIn} 2s ease-in-out 0s;
+
   z-index: 1;
+  overflow: visible;
+
+  @media screen and (min-width: 1200px) {
+    padding-left: 220px;
+    padding-top: 0;
+    min-height: 300px;
+  }
 
   h1 {
     color: white;
+    animation: ${fadeIn} 2s ease-in-out 0s;
+
+    @media screen and (max-width: 1199px) {
+      font-size: 1.5rem;
+      line-height: 1.5rem;
+    }
   }
 `;
 
