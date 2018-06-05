@@ -52,7 +52,7 @@ const ProductBody = styled.section`
   padding: 50px 10px;
 `;
 
-const Product = ({ product, startingStyles }) => {
+const Product = ({ product, startingStyles, animationCallback }) => {
   const { x, y } = startingStyles;
 
   return (
@@ -64,6 +64,7 @@ const Product = ({ product, startingStyles }) => {
         x={x}
         y={y}
         alt="placeholder"
+        animationCallback={animationCallback}
       />
       <ProductHeader>
         <h1>{`Productdetails no. ${product.id}`}</h1>
@@ -89,7 +90,8 @@ Product.propTypes = {
   startingStyles: PropTypes.shape({
     x: PropTypes.number.isRequired,
     y: PropTypes.number.isRequired
-  })
+  }),
+  animationCallback: PropTypes.func.isRequired
 };
 
 export default Product;

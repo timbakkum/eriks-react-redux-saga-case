@@ -27,6 +27,10 @@ export const setDetailStartingStyles = styles => ({
   payload: styles
 });
 
+export const resetDetailStartingStyles = () => ({
+  type: TYPES.RESET_DETAIL_STARTING_STYLES
+});
+
 export function* fetchProducts(action) {
   try {
     yield put({ type: TYPES.START_FETCH_PRODUCTS });

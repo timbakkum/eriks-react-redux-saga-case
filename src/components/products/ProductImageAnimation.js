@@ -13,6 +13,8 @@ const ProductImage = styled.img`
 class ProductImageAnimation extends React.Component {
   render() {
     const { x, y, image } = this.props;
+
+    // the constants below should be in a global config file
     const endingX = 10;
     const endingY = 50;
 
@@ -26,6 +28,7 @@ class ProductImageAnimation extends React.Component {
           x: spring(endingX),
           y: spring(endingY)
         }}
+        onRest={this.props.animationCallback}
       >
         {interpolatingStyle => (
           <ProductImage
@@ -41,6 +44,7 @@ class ProductImageAnimation extends React.Component {
 
 ProductImageAnimation.propTypes = {
   image: PropTypes.string.isRequired,
+  animationCallback: PropTypes.func.isRequired,
   x: PropTypes.number.isRequired,
   y: PropTypes.number.isRequired
 };

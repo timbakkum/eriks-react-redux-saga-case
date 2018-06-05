@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchProductRequest } from './../../actions/productActions';
+import {
+  fetchProductRequest,
+  resetDetailStartingStyles
+} from './../../actions/productActions';
 import { getProductFromArrayById } from './../../selectors/selectors';
 import Product from './Product';
 import PropTypes from 'prop-types';
@@ -34,6 +37,7 @@ class ProductDetail extends Component {
         <Product
           product={product}
           startingStyles={this.props.detailStartingStyles}
+          animationCallback={this.props.resetDetailStartingStyles}
         />
       );
     }
@@ -65,5 +69,6 @@ ProductDetail.propTypes = {
 };
 
 export default connect(mapStateToProps, {
-  getProductData: fetchProductRequest
+  getProductData: fetchProductRequest,
+  resetDetailStartingStyles
 })(ProductDetail);

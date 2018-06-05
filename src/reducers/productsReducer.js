@@ -29,6 +29,11 @@ export default function productsReducer(state = initialState.products, action) {
         ...state,
         detailStartingStyles: action.payload
       };
+    case TYPES.RESET_DETAIL_STARTING_STYLES:
+      return {
+        ...state,
+        detailStartingStyles: { x: 10, y: 50 }
+      };
     default:
       return state;
   }
