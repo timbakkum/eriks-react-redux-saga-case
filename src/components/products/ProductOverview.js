@@ -26,8 +26,6 @@ class ProductOverview extends Component {
       return;
     }
 
-    console.log(id, event);
-
     const x = event.currentTarget.offsetLeft;
     const y = event.currentTarget.offsetTop - window.scrollY;
     const styles = { x, y };

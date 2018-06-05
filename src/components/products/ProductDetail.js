@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchProductRequest } from './../../actions/productActions';
 import { getProductFromArrayById } from './../../selectors/selectors';
+import Product from './Product';
 import PropTypes from 'prop-types';
 
 class ProductDetail extends Component {
   constructor(props) {
     super(props);
+    console.log(props);
     this.selectProduct = this.selectProduct.bind(this);
     this.renderProduct = this.renderProduct.bind(this);
   }
@@ -29,20 +31,10 @@ class ProductDetail extends Component {
       return <p>Product niet gevonden!</p>;
     } else {
       return (
-        <div>
-          <img
-            src={`http://via.placeholder.com/200x200?text=Product+no.${
-              product.id
-            }`}
-            alt="placeholder"
-          />
-          <h2>{`Product no. ${product.id}`}</h2>
-          <p>{product.joke}</p>
-          <h6>categoriën: </h6>
-          {product.categories.length
-            ? product.categories.map(cat => cat)
-            : 'Geen categoriën'}
-        </div>
+        <Product
+          product={product}
+          startingStyles={this.props.detailStartingStyles}
+        />
       );
     }
   }
@@ -50,18 +42,14 @@ class ProductDetail extends Component {
   render() {
     const product = this.selectProduct();
 
-    return (
-      <div>
-        <h1>Product detail</h1>
-        {this.renderProduct(product)}
-      </div>
-    );
+    return <div>{this.renderProduct(product)}</div>;
   }
 }
 
 function mapStateToProps(state) {
   return {
-    products: state.products.data
+    products: state.products.data,
+    detailStartingStyles: state.products.detailStartingStyles
   };
 }
 
