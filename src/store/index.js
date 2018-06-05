@@ -8,6 +8,7 @@ import mySaga from './../sagas';
 
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const history = createHistory();
 const routingMiddleware = routerMiddleware(history);
@@ -31,7 +32,10 @@ const middlewares =
       ]
     : [routingMiddleware, sagaMiddleware];
 
-const store = createStore(persistedReducer, applyMiddleware(...middlewares));
+const store = createStore(
+  persistedReducer,
+  composeWithDevTools(applyMiddleware(...middlewares))
+);
 const persistor = persistStore(store);
 
 sagaMiddleware.run(mySaga);
