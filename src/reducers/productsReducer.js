@@ -4,9 +4,6 @@ import union from 'lodash/union';
 
 export default function productsReducer(state = initialState.products, action) {
   switch (action.type) {
-    case '@@router/LOCATION_CHANGE':
-      console.log(state);
-      return state;
     case TYPES.FETCH_PRODUCTS_SUCCESS:
       return {
         ...state,
