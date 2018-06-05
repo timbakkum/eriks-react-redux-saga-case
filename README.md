@@ -5,6 +5,7 @@
 * convert product array to Object
 * OR use a more funky API with images and more additional data to load
 * add tests
+* add loader for detail page (when fetching if no info is in store yet)
 * optimize performance/refactor
 
 # Create react app Readme
