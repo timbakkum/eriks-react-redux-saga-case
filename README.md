@@ -3,11 +3,9 @@
 ## To-do
 
 * convert product array to Object
-* use a more funky API with images and more additional data to load
-* add loaders
-* add route transition animations
+* OR use a more funky API with images and more additional data to load
 * add tests
-* add styles
+* optimize performance/refactor
 
 # Create react app Readme
 
