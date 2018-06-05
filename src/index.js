@@ -69,7 +69,7 @@ h4, h5, h6 {
   display: table;
 }
 
-.square-spin>div {
+.square-spin > div {
   border: none !important;
 }
 `;

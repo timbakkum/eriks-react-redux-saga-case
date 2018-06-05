@@ -8,7 +8,6 @@ import mySaga from './../sagas';
 
 import createHistory from 'history/createBrowserHistory';
 import { routerMiddleware } from 'react-router-redux';
-import immutableStateInvariantMiddleware from 'redux-immutable-state-invariant';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 const history = createHistory();
@@ -24,7 +23,7 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 // Only add certain middlewares in dev
 const middlewares = [
-  immutableStateInvariantMiddleware,
+  require('redux-immutable-state-invariant').default(),
   loggerMiddleware,
   routingMiddleware,
   sagaMiddleware
