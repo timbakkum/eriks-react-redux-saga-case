@@ -23,6 +23,7 @@ const Card = styled.div`
   p {
     text-align: center;
     margin-bottom: 1rem;
+    text-transform: capitalize;
   }
 `;
 

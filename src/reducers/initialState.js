@@ -1,6 +1,6 @@
 export default {
   products: {
-    data: [],
+    data: {},
     overviewLoading: false,
     detailLoading: false,
     detailStartingStyles: {

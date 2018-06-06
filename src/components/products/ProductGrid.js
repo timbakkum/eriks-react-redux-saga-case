@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Card from './../common/Card';
+import config from './../../config';
 
 const ProductGridWrapper = styled.div`
   display: flex;
@@ -41,14 +42,14 @@ const ProductCardImage = styled.img`
 `;
 
 const renderProducts = (products, transitionToDetail) => {
-  return products.map((product, i) => (
-    <Card key={product.id}>
+  return Object.keys(products).map((key, i) => (
+    <Card key={products[key].name}>
       <ProductCardImage
-        src={`http://via.placeholder.com/200x200?text=Product+no.${product.id}`}
-        alt="placeholder"
-        onClick={transitionToDetail.bind(null, product.id)}
+        src={`${config.productSpriteUrl}${products[key].id}.png`}
+        alt={products[key].name}
+        onClick={transitionToDetail.bind(null, products[key].id)}
       />
-      <p key={i}>{product.joke}</p>
+      <p key={i}>{`Product #${products[key].id}: ${products[key].name}`}</p>
     </Card>
   ));
 };
@@ -62,13 +63,11 @@ const ProductGrid = ({ products, transitionToDetail }) => {
 };
 
 ProductGrid.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      joke: PropTypes.string.isRequired,
-      categories: PropTypes.arrayOf(PropTypes.string)
-    })
-  ),
+  products: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string
+  }),
   transitionToDetail: PropTypes.func.isRequired
 };
 

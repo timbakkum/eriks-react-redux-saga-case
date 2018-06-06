@@ -15,7 +15,7 @@ class ProductOverview extends Component {
   }
 
   componentDidMount() {
-    if (this.props.products.length <= 9) {
+    if (Object.keys(this.props.products).length <= 151) {
       // fetch products if no cached products are present
       this.props.getProductsData();
     }
@@ -63,13 +63,11 @@ function mapStateToProps(state) {
 }
 
 ProductOverview.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      joke: PropTypes.string.isRequired,
-      categories: PropTypes.arrayOf(PropTypes.string)
-    })
-  ),
+  products: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string
+  }),
   getProductsData: PropTypes.func.isRequired
 };
 

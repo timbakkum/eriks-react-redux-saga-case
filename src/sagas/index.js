@@ -1,5 +1,6 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects';
 import * as TYPES from './../actions/actionTypes';
+import config from './../config';
 
 export const api = url => fetch(url).then(response => response.json());
 const delay = ms => new Promise(res => setTimeout(res, ms));
@@ -7,12 +8,14 @@ const delay = ms => new Promise(res => setTimeout(res, ms));
 export function* fetchProducts(action) {
   try {
     yield put({ type: TYPES.START_FETCH_PRODUCTS });
-    const products = yield call(api, 'http://api.icndb.com/jokes/random/10');
-    yield put({ type: TYPES.FETCH_PRODUCTS_SUCCESS, data: products.value });
+    const products = yield call(api, `${config.productEndpoint}?limit=151`);
+    yield put({ type: TYPES.FETCH_PRODUCTS_SUCCESS, data: products.results });
     yield delay(3000);
     yield put({ type: TYPES.END_FETCH_PRODUCTS });
   } catch (e) {
     console.log(e);
+    // dispatch error toaster
+    yield put({ type: TYPES.END_FETCH_PRODUCTS });
   }
 }
 
@@ -20,11 +23,12 @@ export function* fetchProduct(action) {
   try {
     const product = yield call(
       api,
-      `http://api.icndb.com/jokes/${action.payload}`
+      `${config.productEndpoint}${action.payload}`
     );
-    yield put({ type: TYPES.FETCH_PRODUCT_SUCCESS, data: product.value });
+    yield put({ type: TYPES.FETCH_PRODUCT_SUCCESS, data: product });
   } catch (e) {
     console.log(e);
+    // dispatch error toaster
   }
 }
 
