@@ -9,13 +9,6 @@ import Product from './Product';
 import PropTypes from 'prop-types';
 
 class ProductDetail extends Component {
-  constructor(props) {
-    super(props);
-
-    this.selectProduct = this.selectProduct.bind(this);
-    this.renderProduct = this.renderProduct.bind(this);
-  }
-
   componentDidMount() {
     const { id } = this.props.match.params;
 
@@ -24,12 +17,12 @@ class ProductDetail extends Component {
     }
   }
 
-  selectProduct() {
+  selectProduct = () => {
     const { id } = this.props.match.params;
     return getProductFromArrayById(this.props.products, parseInt(id, 10));
-  }
+  };
 
-  renderProduct(product) {
+  renderProduct = product => {
     if (!product) {
       return <p>Product niet gevonden!</p>;
     } else {
@@ -41,7 +34,7 @@ class ProductDetail extends Component {
         />
       );
     }
-  }
+  };
 
   render() {
     const product = this.selectProduct();
