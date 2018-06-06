@@ -9,19 +9,15 @@ import Loader from 'react-loaders';
 import ProductGrid from './ProductGrid';
 
 class ProductOverview extends Component {
-  constructor(props) {
-    super(props);
-    this.transitionToDetail = this.transitionToDetail.bind(this);
-  }
-
   componentDidMount() {
-    if (Object.keys(this.props.products).length <= 151) {
+    if (this.props.productOrder < 151) {
+      console.log('fetching more products');
       // fetch products if no cached products are present
       this.props.getProductsData();
     }
   }
 
-  transitionToDetail(id, event) {
+  transitionToDetail = (id, event) => {
     if (!id) {
       return;
     }
@@ -36,7 +32,7 @@ class ProductOverview extends Component {
 
     this.props.setDetailStartingStyles(styles);
     this.props.history.push(`/product/${id}`);
-  }
+  };
 
   render() {
     return (
@@ -46,7 +42,8 @@ class ProductOverview extends Component {
           <Loader type="square-spin" color="#1a5ca3" active />
         ) : (
           <ProductGrid
-            products={this.props.products}
+            products={this.props.productsData}
+            order={this.props.productOrder}
             transitionToDetail={this.transitionToDetail}
           />
         )}
@@ -57,18 +54,21 @@ class ProductOverview extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products.data,
+    productsData: state.products.byId,
+    productOrder: state.products.allIds,
     loading: state.products.overviewLoading
   };
 }
 
 ProductOverview.propTypes = {
-  products: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+  productsData: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
     url: PropTypes.string
-  }),
-  getProductsData: PropTypes.func.isRequired
+  }).isRequired,
+  productOrder: PropTypes.array.isRequired,
+  getProductsData: PropTypes.func.isRequired,
+  setDetailStartingStyles: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, {

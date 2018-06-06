@@ -41,33 +41,34 @@ const ProductCardImage = styled.img`
   cursor: pointer;
 `;
 
-const renderProducts = (products, transitionToDetail) => {
-  return Object.keys(products).map((key, i) => (
-    <Card key={products[key].name}>
+const renderProducts = (order, products, transitionToDetail) => {
+  return order.map((id, i) => (
+    <Card key={products[id].name}>
       <ProductCardImage
-        src={`${config.productSpriteUrl}${products[key].id}.png`}
-        alt={products[key].name}
-        onClick={transitionToDetail.bind(null, products[key].id)}
+        src={`${config.productSpriteUrl}${products[id].id}.png`}
+        alt={products[id].name}
+        onClick={transitionToDetail.bind(null, products[id].id)}
       />
-      <p key={i}>{`Product #${products[key].id}: ${products[key].name}`}</p>
+      <p id={i}>{`Product #${products[id].id}: ${products[id].name}`}</p>
     </Card>
   ));
 };
 
-const ProductGrid = ({ products, transitionToDetail }) => {
+const ProductGrid = ({ order, products, transitionToDetail }) => {
   return (
     <ProductGridWrapper>
-      {renderProducts(products, transitionToDetail)}
+      {renderProducts(order, products, transitionToDetail)}
     </ProductGridWrapper>
   );
 };
 
 ProductGrid.propTypes = {
   products: PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    name: PropTypes.string.isRequired,
+    id: PropTypes.number,
+    name: PropTypes.string,
     url: PropTypes.string
-  }),
+  }).isRequired,
+  order: PropTypes.array.isRequired,
   transitionToDetail: PropTypes.func.isRequired
 };
 

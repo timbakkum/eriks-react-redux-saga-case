@@ -31,6 +31,14 @@ export const createIdKey = obj => {
   };
 };
 
+export const sortByNumber = (a, b) => {
+  return a - b;
+};
+
+export const createSortedProductsArray = arr => {
+  return arr.map(product => product.id).sort(sortByNumber);
+};
+
 export const removeFromArray = (array, element) => {
   return array.filter(e => e !== element);
 };

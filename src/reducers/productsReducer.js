@@ -3,23 +3,26 @@ import * as TYPES from './../actions/actionTypes';
 import {
   updateObject,
   mapArrayIntoObject,
-  createIdKey
+  createIdKey,
+  createSortedProductsArray,
+  sortByNumber
 } from './../utilities/utilities';
 import union from 'lodash/union';
 
 export default function productsReducer(state = initialState.products, action) {
   switch (action.type) {
     case TYPES.FETCH_PRODUCTS_SUCCESS:
-      const newProductsData = action.data.map(product => createIdKey(product));
-      console.log(action.data, newProductsData);
+      const newProductsById = action.data.map(product => createIdKey(product));
+      const newProductsAllIds = createSortedProductsArray(newProductsById);
+
       return {
         ...state,
-        data: updateObject(state.data, mapArrayIntoObject(newProductsData))
+        byId: updateObject(state.data, mapArrayIntoObject(newProductsById)),
+        allIds: union([...state.allIds], newProductsAllIds).sort(sortByNumber)
       };
     case TYPES.FETCH_PRODUCT_SUCCESS:
       return {
-        ...state,
-        data: union([...state.data], [action.data])
+        ...state
       };
     case TYPES.START_FETCH_PRODUCTS:
       return {

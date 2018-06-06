@@ -1,6 +1,7 @@
 export default {
   products: {
-    data: {},
+    byId: {},
+    allIds: [],
     overviewLoading: false,
     detailLoading: false,
     detailStartingStyles: {
