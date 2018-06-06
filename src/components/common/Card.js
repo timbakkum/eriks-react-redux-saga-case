@@ -18,6 +18,7 @@ const Card = styled.div`
     max-width: 100%;
     height: auto;
     margin-bottom: 1rem;
+    align-self: center;
   }
 
   p {
