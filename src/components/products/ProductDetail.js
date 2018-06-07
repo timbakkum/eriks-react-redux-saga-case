@@ -4,7 +4,6 @@ import {
   fetchProductRequest,
   resetDetailStartingStyles
 } from './../../actions/productActions';
-import { getProductFromArrayById } from './../../selectors/selectors';
 import Product from './Product';
 import PropTypes from 'prop-types';
 
@@ -12,14 +11,19 @@ class ProductDetail extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
 
-    if (!this.selectProduct()) {
+    if (!this.hasProductDetails()) {
       this.props.getProductData(id);
     }
   }
 
-  selectProduct = () => {
+  selectProductDetails = () => {
     const { id } = this.props.match.params;
-    return getProductFromArrayById(this.props.products, parseInt(id, 10));
+    return this.props.productsData[id];
+  };
+
+  hasProductDetails = () => {
+    const { id } = this.props.match.params;
+    return this.props.productsData[id] && this.props.productsData[id].details;
   };
 
   renderProduct = product => {
@@ -31,13 +35,14 @@ class ProductDetail extends Component {
           product={product}
           startingStyles={this.props.detailStartingStyles}
           animationCallback={this.props.resetDetailStartingStyles}
+          isLoading={this.props.isLoading}
         />
       );
     }
   };
 
   render() {
-    const product = this.selectProduct();
+    const product = this.selectProductDetails();
 
     return <div>{this.renderProduct(product)}</div>;
   }
@@ -45,19 +50,20 @@ class ProductDetail extends Component {
 
 function mapStateToProps(state) {
   return {
-    products: state.products.data,
-    detailStartingStyles: state.products.detailStartingStyles
+    productsData: state.products.byId,
+    detailStartingStyles: state.products.detailStartingStyles,
+    isLoading: state.products.detailLoading
   };
 }
 
 ProductDetail.propTypes = {
-  products: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      joke: PropTypes.string.isRequired,
-      categories: PropTypes.arrayOf(PropTypes.string)
-    })
-  ),
+  productsData: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    url: PropTypes.string
+  }).isRequired,
+  detailStartingStyles: PropTypes.object.isRequired,
+  resetDetailStartingStyles: PropTypes.func.isRequired,
   getProductData: PropTypes.func.isRequired
 };
 

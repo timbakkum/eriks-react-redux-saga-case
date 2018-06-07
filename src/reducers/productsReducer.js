@@ -17,12 +17,18 @@ export default function productsReducer(state = initialState.products, action) {
 
       return {
         ...state,
-        byId: updateObject(state.data, mapArrayIntoObject(newProductsById)),
+        byId: updateObject(state.byId, mapArrayIntoObject(newProductsById)),
         allIds: union([...state.allIds], newProductsAllIds).sort(sortByNumber)
       };
     case TYPES.FETCH_PRODUCT_SUCCESS:
       return {
-        ...state
+        ...state,
+        byId: {
+          ...state.byId,
+          [action.data.id]: updateObject(state.byId[action.data.id], {
+            details: action.data
+          })
+        }
       };
     case TYPES.START_FETCH_PRODUCTS:
       return {

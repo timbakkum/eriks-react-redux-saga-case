@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import ProductImageAnimation from './ProductImageAnimation';
+import config from './../../config';
 
 const ProductWrapper = styled.article`
   position: relative;
@@ -58,12 +59,10 @@ const Product = ({ product, startingStyles, animationCallback }) => {
   return (
     <ProductWrapper>
       <ProductImageAnimation
-        image={`http://via.placeholder.com/200x200?text=Product+no.${
-          product.id
-        }`}
+        image={`${config.productSpriteUrl}${product.id}.png`}
         x={x}
         y={y}
-        alt="placeholder"
+        alt={product.id}
         animationCallback={animationCallback}
       />
       <ProductHeader>
@@ -71,11 +70,7 @@ const Product = ({ product, startingStyles, animationCallback }) => {
       </ProductHeader>
 
       <ProductBody>
-        <p>{product.joke}</p>
-        <h6>categoriën: </h6>
-        {product.categories.length
-          ? product.categories.map(cat => cat)
-          : 'Geen categoriën'}
+        <p>{product.name}</p>
       </ProductBody>
     </ProductWrapper>
   );
@@ -84,8 +79,9 @@ const Product = ({ product, startingStyles, animationCallback }) => {
 Product.propTypes = {
   product: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    joke: PropTypes.string.isRequired,
-    categories: PropTypes.arrayOf(PropTypes.string)
+    name: PropTypes.string.isRequired,
+    url: PropTypes.string.isRequired,
+    details: PropTypes.object
   }).isRequired,
   startingStyles: PropTypes.shape({
     x: PropTypes.number.isRequired,
