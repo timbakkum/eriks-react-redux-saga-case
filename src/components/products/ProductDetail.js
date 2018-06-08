@@ -10,7 +10,6 @@ import PropTypes from 'prop-types';
 class ProductDetail extends Component {
   componentDidMount() {
     const { id } = this.props.match.params;
-
     if (!this.hasProductDetails()) {
       this.props.getProductData(id);
     }
@@ -43,8 +42,13 @@ class ProductDetail extends Component {
 
   render() {
     const product = this.selectProductDetails();
+    const isLoading = this.props.isLoading;
 
-    return <div>{this.renderProduct(product)}</div>;
+    if (!product && isLoading) {
+      return <p>Loading...</p>;
+    } else {
+      return <div>{this.renderProduct(product)}</div>;
+    }
   }
 }
 
@@ -62,6 +66,7 @@ ProductDetail.propTypes = {
     name: PropTypes.string,
     url: PropTypes.string
   }).isRequired,
+  isLoading: PropTypes.bool.isRequired,
   detailStartingStyles: PropTypes.object.isRequired,
   resetDetailStartingStyles: PropTypes.func.isRequired,
   getProductData: PropTypes.func.isRequired

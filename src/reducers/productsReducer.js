@@ -26,9 +26,12 @@ export default function productsReducer(state = initialState.products, action) {
         byId: {
           ...state.byId,
           [action.data.id]: updateObject(state.byId[action.data.id], {
+            name: action.data.name,
+            id: action.data.id,
             details: action.data
           })
-        }
+        },
+        allIds: union([...state.allIds], [action.data.id]).sort(sortByNumber)
       };
     case TYPES.START_FETCH_PRODUCTS:
       return {
@@ -39,6 +42,17 @@ export default function productsReducer(state = initialState.products, action) {
       return {
         ...state,
         overviewLoading: false
+      };
+
+    case TYPES.START_FETCH_PRODUCT:
+      return {
+        ...state,
+        detailLoading: true
+      };
+    case TYPES.END_FETCH_PRODUCT:
+      return {
+        ...state,
+        detailLoading: false
       };
     case TYPES.SET_DETAIL_STARTING_STYLES:
       return {

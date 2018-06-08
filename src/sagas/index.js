@@ -21,14 +21,18 @@ export function* fetchProducts(action) {
 
 export function* fetchProduct(action) {
   try {
+    yield put({ type: TYPES.START_FETCH_PRODUCT });
+
     const product = yield call(
       api,
       `${config.productEndpoint}${action.payload}`
     );
     yield put({ type: TYPES.FETCH_PRODUCT_SUCCESS, data: product });
+    yield put({ type: TYPES.END_FETCH_PRODUCT });
   } catch (e) {
     console.log(e);
     // dispatch error toaster
+    yield put({ type: TYPES.END_FETCH_PRODUCT });
   }
 }
 
