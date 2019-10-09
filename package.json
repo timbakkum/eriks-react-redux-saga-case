@@ -8,7 +8,7 @@
     "lodash": "^4.17.10",
     "prop-types": "^15.6.1",
     "react": "^16.4.0",
-    "react-dom": "^16.4.0",
+    "react-dom": "^16.4.2",
     "react-loaders": "^3.0.1",
     "react-motion": "^0.5.2",
     "react-redux": "^5.0.7",
