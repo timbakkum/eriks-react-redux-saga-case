@@ -6,6 +6,8 @@ State is persisted using redux-persist.
 Routing state is stored in the redux store by using the ConnectedRouter from react-router-redux and by hooking it's routerMiddleware.
 Async calls are managed by redux sagas.
 
+hosted on https://inspiring-mccarthy-aabf4b.netlify.com
+
 ## To-do
 
 * convert product array to Object
